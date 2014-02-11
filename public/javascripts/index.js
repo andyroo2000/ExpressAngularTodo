@@ -13,6 +13,13 @@ app.factory('Todos', function($http) {
       .then(function(results) {
         self.todos = results.data;
       });
+    },
+    postTodos: function() {
+      var self = this;
+      $http.post('/todos')
+      .success(function(data) {
+        return self.todos;
+      });
     }
   };
 });

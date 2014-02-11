@@ -5,7 +5,6 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
@@ -20,9 +19,9 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
 
 app.get('/hi', function(req, res) {
   var message = "Howdy!";
@@ -34,9 +33,28 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/', function(req, res) {
+  res.render('index', {title: 'Express'});
+});
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+
+
+
+// This will go into its own file
+var todos = [{text: "get some milk", done: false, createdOn: "today"}];
+
+app.get('/todos', function(req, res) {
+  return res.json(200, todos);
+});
+
+app.put('/todos', function(req, res) {
+
+});
+
+app.post('/todos', function(req, res) {
+  data.push(req.body);
+  res.send(data);
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
