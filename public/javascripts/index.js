@@ -14,11 +14,10 @@ app.factory('Todos', function($http) {
         self.todos = results.data;
       });
     },
-    postTodos: function() {
-      var self = this;
-      $http.post('/todos')
+    postTodos: function(items) {
+      $http.post('/todos', items)
       .success(function(data) {
-        return self.todos;
+        console.log(data);
       });
     }
   };
@@ -38,6 +37,7 @@ function TodoCtrl($scope, Todos) {
 
   $scope.addTodoItem = function() {
     Todos.addItem($scope.formTodoText);
+    Todos.postTodos(Todos.todos);
     $scope.formTodoText = "";
   };
 }
