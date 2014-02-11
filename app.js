@@ -23,11 +23,6 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
-app.get('/hi', function(req, res) {
-  var message = "Howdy!";
-  res.send(message);
-});
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -39,8 +34,14 @@ app.get('/', function(req, res) {
 
 
 
-
 // This will go into its own file
+
+
+
+
+
+
+
 var todos = [{text: "get some milk", done: false, createdOn: "today"}];
 
 app.get('/todos', function(req, res) {
@@ -52,8 +53,8 @@ app.put('/todos', function(req, res) {
 });
 
 app.post('/todos', function(req, res) {
-  data.push(req.body);
-  res.send(data);
+  todos = req.body;
+  return res.json(200, todos);
 });
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -14,8 +14,9 @@ app.factory('Todos', function($http) {
         self.todos = results.data;
       });
     },
-    postTodos: function(items) {
-      $http.post('/todos', items)
+    postTodos: function() {
+      var self = this;
+      $http.post('/todos', self.todos)
       .success(function(data) {
         console.log(data);
       });
@@ -37,8 +38,9 @@ function TodoCtrl($scope, Todos) {
 
   $scope.addTodoItem = function() {
     Todos.addItem($scope.formTodoText);
-    Todos.postTodos(Todos.todos);
+    Todos.postTodos();
     $scope.formTodoText = "";
+    Todos.getTodos();
   };
 }
 
