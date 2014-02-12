@@ -12,9 +12,7 @@ block content
 
       div.page
         ul
-          li(ng-repeat="todo in todos")
-            input(type="checkbox" ng-model="todo.done")
-            span(class="todo-{{todo.done}}")
-              {{todo.text}}
-              span#created.
-                created on: {{todo.createdOn | date: 'MMMM d, y - h:mm a'}}
+          li(ng-repeat="todo in todos" ng-click="toggle(todo)" class="todo-{{todo.done}}" )
+            {{todo.text}}
+            span#created.
+              created on: {{todo.createdOn | date: 'MMMM d, y - h:mm a'}}

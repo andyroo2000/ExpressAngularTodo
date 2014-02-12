@@ -32,7 +32,7 @@ body .page li {
 body .page li input {
   width: 13px;
 }
-body .page li .todo-true {
+body .page .todo-true {
   color: #ccc;
   text-decoration: line-through;
 }

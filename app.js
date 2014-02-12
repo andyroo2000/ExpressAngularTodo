@@ -42,18 +42,22 @@ app.get('/', function(req, res) {
 
 
 
-var todos = [{text: "get some milk", done: false, createdOn: "today"}];
+var todos = [];
 
 app.get('/todos', function(req, res) {
   return res.json(200, todos);
 });
 
 app.put('/todos', function(req, res) {
-
+  var status = req.body;
+  var index = status.index;
+  todos[index] = status.done;
+  return res.json(200, todos);
 });
 
 app.post('/todos', function(req, res) {
-  todos = req.body;
+  todo = req.body;
+  todos.unshift(todo);
   return res.json(200, todos);
 });
 
