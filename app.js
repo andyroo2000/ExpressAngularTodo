@@ -41,7 +41,6 @@ app.get('/', function(req, res) {
 
 
 
-
 var todos = [];
 
 app.get('/todos', function(req, res) {
@@ -49,13 +48,14 @@ app.get('/todos', function(req, res) {
 });
 
 app.put('/todos', function(req, res) {
+  var length = todos.length;
   var status = req.body;
-  var index = status.index;
-  todos[index] = status.done;
+  var index = length - status.index - 1;
+  todos[index].done = status.done;
   return res.json(200, todos);
 });
 
-app.post('/todos', function(req, res) {
+app.post('/todos/update', function(req, res) {
   todo = req.body;
   todos.unshift(todo);
   return res.json(200, todos);

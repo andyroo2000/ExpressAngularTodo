@@ -5,7 +5,7 @@ app.factory('Todos', function($http) {
     todos: [],
     addItem: function(item) {
       var now = new Date();
-      this.todos.unshift({text: item, done: false, createdOn: now, index: this.todos.length});
+      this.todos.unshift({index: this.todos.length, createdOn: now, text: item, done: false});
     },
     getTodos: function() {
       var self = this;
@@ -16,7 +16,7 @@ app.factory('Todos', function($http) {
     },
     postTodos: function() {
       var self = this;
-      $http.post('/todos', self.todos[0])
+      $http.post('/todos/update', self.todos[0])
       .success(function(data) {
         console.log(data);
       });
@@ -48,9 +48,8 @@ function TodoCtrl($scope, Todos) {
   };
 
   $scope.toggle = function(todo) {
-    // console.log("Called " + todo.text);
     todo.done = !todo.done;
-    var update = {done: todo.done, createdOn: todo.createdOn};
+    var update = {index: todo.index, done: todo.done, createdOn: todo.createdOn};
     Todos.updateTodo(update);
   };
 
