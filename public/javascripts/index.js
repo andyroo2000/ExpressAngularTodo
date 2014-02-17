@@ -1,5 +1,16 @@
 var app = angular.module("todoApp", []);
 
+app.directive('myItem', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    transclude: true,
+    templateUrl: 'myItem.html',
+    link: function(scope, element, attrs) {
+    }
+  };
+});
+
 app.factory('Todos', function($http) {
   return {
     todos: [],
