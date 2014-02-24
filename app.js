@@ -34,6 +34,7 @@ app.get('/', function(req, res) {
 
 
 
+
 // This will go into its own file
 
 
@@ -56,7 +57,7 @@ app.put('/todos', function(req, res) {
 });
 
 app.post('/todos/update', function(req, res) {
-  todo = req.body;
+  var todo = req.body;
   todos.unshift(todo);
   return res.json(200, todos);
 });
@@ -64,3 +65,4 @@ app.post('/todos/update', function(req, res) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
