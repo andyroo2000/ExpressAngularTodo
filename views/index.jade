@@ -5,7 +5,7 @@ block content
   div(ng-app="todoApp")
 
     div(ng-controller="TodoCtrl")
-      h1 Todo List with {{incompleteCount}} incomplete todos
+      h1 To-do List with {{incompleteCount}} incomplete to-do items
       button.add(ng-click="addTodoItem()") Add
       form
         input(type="text" placeholder="add a new item" ng-model="formTodoText")
